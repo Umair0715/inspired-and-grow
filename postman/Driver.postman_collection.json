@@ -1,0 +1,154 @@
+{
+	"info": {
+		"_postman_id": "b64cab3e-bb10-48cb-a098-0f650c6d21bd",
+		"name": "Driver",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17574990"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\" : \"John\" ,\r\n    \"lastName\" : \"Doe\" ,\r\n    \"email\" : \"john@gmail.com\" ,\r\n    \"phone\" : \"0933920223443\" ,\r\n    \"password\" : \"user1234\",\r\n    \"location\" : \"US\",\r\n    \"route\" : \"test route\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/driver/register",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"driver",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : \"john@gmail.com\" ,\r\n    \"password\" : \"user1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/driver/login",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"driver",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Profile",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/driver/profile",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"driver",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Profile",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\" : \"john\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/driver/profile",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"driver",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update password",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"oldPassword\" : \"user1234\" ,\r\n    \"newPassword\" : \"user12345\" ,\r\n    \"passwordConfirm\" : \"user12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/driver/update-password",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"driver",
+						"update-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/user/logout",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"user",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
