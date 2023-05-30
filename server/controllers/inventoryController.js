@@ -110,3 +110,8 @@ exports.removeInventoryImage = catchAsync(async(req , res , next) => {
         doc : updatedInventory
     })
 });
+
+exports.getTotalInventory = catchAsync(async ( req , res ) => {
+    const docs = await Inventory.find({}).select('name');
+    sendSuccessResponse(res , 200 , { docs })
+})

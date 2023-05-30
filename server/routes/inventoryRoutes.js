@@ -1,4 +1,4 @@
-const { createInventory, getAllInventories, updateInventory, getSingleInventory, deleteInventory, removeInventoryImage } = require('../controllers/inventoryController');
+const { createInventory, getAllInventories, updateInventory, getSingleInventory, deleteInventory, removeInventoryImage , getTotalInventory } = require('../controllers/inventoryController');
 const { protect } = require('../middlewares/protect');
 const Admin = require('../models/adminModel');
 const router = require('express').Router();
@@ -6,6 +6,8 @@ const router = require('express').Router();
 router.route('/')
     .post(protect(Admin) , createInventory)
     .get(getAllInventories);
+
+router.get('/total' , getTotalInventory);
 
 router.route('/:id')
     .put(protect(Admin) , updateInventory)

@@ -8,7 +8,8 @@ const packageValidation = joi.object().keys({
     unit : joi.string().required() ,
     mainCategory : joi.string().required(),
     subCategory : joi.string().required(),
-    price : joi.number().required() 
+    price : joi.number().required() ,
+    description : joi.string().optional()
    
 });
 
