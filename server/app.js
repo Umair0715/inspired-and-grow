@@ -24,6 +24,9 @@ app.use('/api/sub-category' , require('./routes/subCategoryRoutes'));
 app.use('/api/inventory' , require('./routes/inventoryRoutes'));
 app.use('/api/driver' , require('./routes/driverRoutes'));
 app.use('/api/banner' , require('./routes/bannerRoutes'));
+app.use('/api/pre-booking' , require('./routes/preBookingRoutes'));
+app.use('/api/order' , require('./routes/orderRoutes'));
+app.use('/api/coupon' , require('./routes/couponRoutes'));
 
 app.use(require('./middlewares/errorHandler'));
 

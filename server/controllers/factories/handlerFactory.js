@@ -30,6 +30,11 @@ exports.getAll = (Model, populateItems = '') => catchAsync(async(req , res , nex
     if(req.query.pageSize && req.query.pageSize > 25){
         return next(new AppError('pageSize should be less than or equal to 25' , 400));
     }
+    const status = req.query.status;
+    let filter = {};
+    if(status) {
+        filter = { status }
+    }
     const keyword = req.query.keyword ?
     {
         name : {
@@ -37,8 +42,8 @@ exports.getAll = (Model, populateItems = '') => catchAsync(async(req , res , nex
             $options : 'i'
         }
     } : {} ;    
-    const docCount = await Model.countDocuments(keyword);
-    const docs = await Model.find(keyword)
+    const docCount = await Model.countDocuments({...filter , ...keyword});
+    const docs = await Model.find({...filter , ...keyword})
     .populate(populateItems)
     .skip(pageSize * (page - 1))
     .limit(pageSize)
@@ -57,7 +62,7 @@ exports.getOne = (Model, populateItems) => catchAsync(async(req , res , next) =>
     sendSuccessResponse(res , 200 , { doc })
 })
 
-exports.updateOne = (Model , imgDirectory) => catchAsync(async(req , res , next) => {
+exports.updateOne = (Model , imgDirectory , populateItems = '') => catchAsync(async(req , res , next) => {
     const { id } = req.params;
     const { image } = req.body;
     if(image) {
@@ -67,7 +72,9 @@ exports.updateOne = (Model , imgDirectory) => catchAsync(async(req , res , next)
     const updatedDoc = await Model.findByIdAndUpdate(id , req.body , {
         new : true ,
         runValidators : true 
-    });
+    })
+    .populate(populateItems)
+
     if(!updatedDoc) return next(new AppError('Invalid id provided.' , 404))
     return sendSuccessResponse(res , 200 , {
         message : 'Document updated successfully.',
@@ -100,8 +107,13 @@ exports.getMy = (Model , populateItems) => catchAsync(async(req , res , next) =>
             $options : 'i'
         }
     } : {} ;
-    const docCount = await Model.countDocuments({...keyword , user : req.user._id });
-    const docs = await Model.find({...keyword , user : req.user._id })
+    const status = req.query.status;
+    let filter = {};
+    if(status) {
+        filter = { status }
+    }
+    const docCount = await Model.countDocuments({...filter , ...keyword , user : req.user._id });
+    const docs = await Model.find({...filter , ...keyword , user : req.user._id })
     .populate(populateItems)
     .skip(pageSize * (page - 1))
     .limit(pageSize)
