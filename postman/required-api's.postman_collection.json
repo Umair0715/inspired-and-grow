@@ -1,0 +1,171 @@
+{
+	"info": {
+		"_postman_id": "ed6b9acb-1f69-474c-995b-ddbb6f87d84d",
+		"name": "required-api's",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17574990"
+	},
+	"item": [
+		{
+			"name": "wishlist",
+			"item": [
+				{
+					"name": "Add Item to Wishlist",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product\" : \"6460d081682e2aaa85f1f5c2\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/wishlist",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"wishlist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get My Wishlist Item",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/wishlist",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"wishlist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove From Wishlist",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/wishlist/{productId}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"wishlist",
+								"{productId}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Place Order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"orderItems\" : [\r\n        {\r\n            \"product\" : \"6460d081682e2aaa85f1f5c2\",\r\n            \"qty\" : 1\r\n        } , \r\n        {\r\n            \"product\" : \"6460d081682e2aaa85f1f5c2\",\r\n            \"qty\" : 1\r\n        }\r\n    ] , \r\n    \"shippingInfo\" : {\r\n        \"address\" : \"test address\" ,\r\n        \"phone\" : \"03490394\"\r\n    } , \r\n    \"totalPrice\" : 1000 , \r\n    \"shippingPrice\" : 90\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/order",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Orders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/order/my?status=processing",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"order",
+						"my"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "processing"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Profile",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\" : \"test up\",\r\n    \"lastName\" : \"test\" ,\r\n    \"image\" : \"base64 String\",\r\n    \"location\" : \"test \"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/user/profile",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"user",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Order Details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/order/647f3702ccf1e31e343ef4e8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"order",
+						"647f3702ccf1e31e343ef4e8"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

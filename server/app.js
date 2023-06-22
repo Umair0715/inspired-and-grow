@@ -27,6 +27,7 @@ app.use('/api/banner' , require('./routes/bannerRoutes'));
 app.use('/api/pre-booking' , require('./routes/preBookingRoutes'));
 app.use('/api/order' , require('./routes/orderRoutes'));
 app.use('/api/coupon' , require('./routes/couponRoutes'));
+app.use('/api/wishlist' , require('./routes/wishlistRoutes'));
 
 app.use(require('./middlewares/errorHandler'));
 

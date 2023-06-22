@@ -23,7 +23,7 @@ exports.createOne = (Model , docValidation = null , imgDirectory) => catchAsync(
     })
 });
 
-exports.getAll = (Model, populateItems = '') => catchAsync(async(req , res , next) => {
+exports.getAll = (Model, populateItems = '' , statusField = null) => catchAsync(async(req , res , next) => {
     const page = Number(req.query.page) || 1 ;
     const sort = req.query.sort || -1;
     const pageSize = req.query.pageSize || 10;
@@ -33,7 +33,11 @@ exports.getAll = (Model, populateItems = '') => catchAsync(async(req , res , nex
     const status = req.query.status;
     let filter = {};
     if(status) {
-        filter = { status }
+        if(statusField) {
+            filter = { [statusField] : status }
+        }else {
+            filter = { status }
+        }
     }
     const keyword = req.query.keyword ?
     {
@@ -93,7 +97,7 @@ exports.deleteOne = Model => catchAsync(async( req , res , next) => {
     })
 });
 
-exports.getMy = (Model , populateItems) => catchAsync(async(req , res , next) => {
+exports.getMy = (Model , populateItems , statusField = null) => catchAsync(async(req , res , next) => {
     const page = req.query.page || 1 ;
     const sort = req.query.sort || -1;
     const pageSize = req.query.pageSize || 10 ;
@@ -110,7 +114,11 @@ exports.getMy = (Model , populateItems) => catchAsync(async(req , res , next) =>
     const status = req.query.status;
     let filter = {};
     if(status) {
-        filter = { status }
+        if(statusField) {
+            filter = { [statusField] : status }
+        }else {
+            filter = { status }
+        }
     }
     const docCount = await Model.countDocuments({...filter , ...keyword , user : req.user._id });
     const docs = await Model.find({...filter , ...keyword , user : req.user._id })

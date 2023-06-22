@@ -44,8 +44,8 @@ exports.createOrder = catchAsync(async(req , res , next) => {
     })
 });
 
-exports.getMyOrders = handlerFactory.getMy(Order , populateObj);
-exports.getAllOrders = handlerFactory.getAll(Order , populateObj);
+exports.getMyOrders = handlerFactory.getMy(Order , populateObj , 'orderStatus');
+exports.getAllOrders = handlerFactory.getAll(Order , populateObj , 'orderStatus');
 exports.getSingleOrder = handlerFactory.getOne(Order , populateObj);
 exports.updateOrder = handlerFactory.updateOne(Order , populateObj);
 exports.deleteOrder = handlerFactory.deleteOne(Order , populateObj);
