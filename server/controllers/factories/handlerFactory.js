@@ -73,11 +73,12 @@ exports.updateOne = (Model , imgDirectory , populateItems = '') => catchAsync(as
         const { fileName } = uploadImage(image , imgDirectory);
         req.body.image = fileName;
     }
-    const updatedDoc = await Model.findByIdAndUpdate(id , req.body , {
+    let updatedDoc = await Model.findByIdAndUpdate(id , req.body , {
         new : true ,
         runValidators : true 
     })
-    .populate(populateItems)
+    
+    updatedDoc = await updatedDoc.populate(populateItems)
 
     if(!updatedDoc) return next(new AppError('Invalid id provided.' , 404))
     return sendSuccessResponse(res , 200 , {

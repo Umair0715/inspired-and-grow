@@ -153,6 +153,16 @@
 		{
 			"name": "Get All Users",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDYwNGRkMzg1NzJhMjIzY2Y3ZWI1ODQiLCJpYXQiOjE2ODUwMjk2MzUsImV4cCI6MTY4NTYzNDQzNX0.R_Oh_zj61CRKKsA0Vd3DM_PPXs3UBRwf3WNwAJjYVMk",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {

@@ -31,6 +31,9 @@ exports.createOrder = catchAsync(async(req , res , next) => {
     if(!orderItems || !shippingInfo || !totalPrice) {
         return next(new AppError('Missing required credentials.' , 400))
     }
+    if(orderItems.length === 0) {
+        return next(new AppError('Empty order. Please select at least one item.' , 400))
+    }
     const newOrder = await Order.create({
         orderItems ,
         shippingInfo ,
@@ -47,5 +50,5 @@ exports.createOrder = catchAsync(async(req , res , next) => {
 exports.getMyOrders = handlerFactory.getMy(Order , populateObj , 'orderStatus');
 exports.getAllOrders = handlerFactory.getAll(Order , populateObj , 'orderStatus');
 exports.getSingleOrder = handlerFactory.getOne(Order , populateObj);
-exports.updateOrder = handlerFactory.updateOne(Order , populateObj);
+exports.updateOrder = handlerFactory.updateOne(Order , '' , populateObj);
 exports.deleteOrder = handlerFactory.deleteOne(Order , populateObj);

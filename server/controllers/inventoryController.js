@@ -114,4 +114,16 @@ exports.removeInventoryImage = catchAsync(async(req , res , next) => {
 exports.getTotalInventory = catchAsync(async ( req , res ) => {
     const docs = await Inventory.find({}).select('name');
     sendSuccessResponse(res , 200 , { docs })
+});
+
+
+exports.getSuggestedItems = catchAsync(async(req , res , next) => {
+    const { type } = req.query;
+    if(type === 'main') {
+
+    }else if (type === 'sub') {
+
+    }else {
+        return next(new AppError('InValid type provided.', 400))
+    }
 })

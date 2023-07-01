@@ -20,7 +20,7 @@ exports.applyCoupon = catchAsync(async(req , res , next) => {
         return next(new AppError('Coupon not found.' , 404))
     }
     if(!coupon.isActive) {
-        return next(new AppError('Coupon is not active yet.' , 400))
+        return next(new AppError('This Coupon is not active yet.' , 400))
     }
     if(new Date(coupon.startDate) > new Date()) {
         return next(new AppError('This Coupon is started yet.' , 400))
