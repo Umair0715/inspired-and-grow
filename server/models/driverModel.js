@@ -41,6 +41,9 @@ const driverSchema = new mongoose.Schema({
     route : {
         type : String ,
         required : [true , 'Driver Route is required.']
+    } ,
+    fcm_token : {
+        type : String 
     }
 } , { timestamps : true } );
 

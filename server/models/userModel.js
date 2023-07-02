@@ -42,6 +42,9 @@ const userSchema = new mongoose.Schema({
         type : String ,
         enum : ['phone' , 'google' , 'facebook' , 'email'] ,
         default : 'email'
+    } , 
+    fcm_token : {
+        type : String ,
     }
 } , { timestamps : true });
 

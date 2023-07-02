@@ -8,7 +8,8 @@ const dirverValidation = joi.object().keys({
     phone : joi.string().required() ,
     password : joi.string().optional() , 
     image : joi.string().optional(),
-    route : joi.string().required()
+    route : joi.string().required() ,
+    fcm_token : joi.string().required() 
 });
 
 module.exports = dirverValidation;

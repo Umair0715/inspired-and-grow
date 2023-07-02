@@ -15,10 +15,10 @@ router.route('/profile')
 router.put('/update-password' , protect(Driver) , updatePassword);
 router.get('/logout' , logout);
 
-router.get('/all' , protect(Admin) , getAllDrivers);
+router.get('/all' , getAllDrivers);
 router.put('/edit/:id' , protect(Admin) , editDriver );
 router.delete('/delete/:id' , protect(Admin) , deleteDriver);
-router.get('/details/:id' , protect(Admin) , getSingleDriver)
+router.get('/details/:id' , getSingleDriver)
 
 
 

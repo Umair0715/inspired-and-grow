@@ -7,7 +7,8 @@ const userValidation = joi.object().keys({
     location : joi.string().optional() ,
     phone : joi.string().required() ,
     password : joi.string().optional() , 
-    image : joi.string().optional()
+    image : joi.string().optional() ,
+    fcm_token : joi.string().required() 
 });
 
 module.exports = userValidation;
