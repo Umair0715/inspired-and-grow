@@ -12,9 +12,9 @@ router.route('/')
 router.get('/my' , protect(User) , getMyBookings)
 
 router.route('/:id')
-    .put( updateBooking)
+    .put(protect(Admin) , updateBooking)
     .get(getBookingDetails)
-    .delete( deleteBooking);
+    .delete(protect(Admin) , deleteBooking);
 
 
 module.exports = router;

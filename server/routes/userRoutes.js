@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { register, login, getProfile, updateProfile, updatePassword, logout, getAllUsers, editUser, deleteUser , getSingleUser , createUser, googleLogin, facebookLogin } = require('../controllers/userController');
+const { register, login, getProfile, updateProfile, updatePassword, logout, getAllUsers, editUser, deleteUser , getSingleUser , createUser, googleLogin, facebookLogin, sendForgotPasswordOtp, verifyOtp, resetPassword } = require('../controllers/userController');
 const { protect } = require('../middlewares/protect');
 const User = require('../models/userModel');
 const Admin = require('../models/adminModel');
@@ -22,7 +22,9 @@ router.post('/create' , protect(Admin) , createUser);
 router.put('/edit/:id' , protect(Admin) , editUser );
 router.delete('/delete/:id' , protect(Admin) , deleteUser);
 router.get('/details/:id' , protect(Admin) , getSingleUser)
-
+router.post('/forgot-password' , sendForgotPasswordOtp);
+router.post('/verify-otp' , verifyOtp);
+router.post('/reset-password' , resetPassword)
 
 
 module.exports = router;

@@ -52,3 +52,62 @@ exports.getAllOrders = handlerFactory.getAll(Order , populateObj , 'orderStatus'
 exports.getSingleOrder = handlerFactory.getOne(Order , populateObj);
 exports.updateOrder = handlerFactory.updateOne(Order , '' , populateObj);
 exports.deleteOrder = handlerFactory.deleteOne(Order , populateObj);
+
+exports.getOngoingOrders = catchAsync(async(req , res) => {
+    const page = Number(req.query.page) || 1;
+    const pageSize = 10;
+
+    const query = {
+        $or : [
+            {
+                orderStatus : 'pending'
+            } ,
+            {
+                orderStatus : 'processing'
+            }
+        ] , 
+        user : req.user._id 
+    }
+    const orders = await Order.find(query)
+    .populate(populateObj)
+    .limit(pageSize)
+    .skip(pageSize * (page - 1))
+    .sort({ createdAt : -1 })
+
+    const docCount = await Order.countDocuments(query);
+    const pages = Math.ceil(docCount/pageSize);
+    sendSuccessResponse(res , 200 , {
+        docs : orders , pages , page , docCount
+    })
+});
+
+exports.getOrdersHistory = catchAsync(async(req , res) => {
+    const page = Number(req.query.page) || 1;
+    const pageSize = 10;
+
+    const query = {
+        $or : [
+            {
+                orderStatus : 'delivered' 
+            } ,
+            {
+                orderStatus : 'cancelled' 
+            } ,
+            {
+                orderStatus : 'returned' 
+            }
+        ] , 
+        user : req.user._id 
+    }
+    const orders = await Order.find(query)
+    .populate(populateObj)
+    .limit(pageSize)
+    .skip(pageSize * (page - 1))
+    .sort({ createdAt : -1 })
+
+    const docCount = await Order.countDocuments(query);
+    const pages = Math.ceil(docCount/pageSize);
+    sendSuccessResponse(res , 200 , {
+        docs : orders , pages , page , docCount
+    })
+})
