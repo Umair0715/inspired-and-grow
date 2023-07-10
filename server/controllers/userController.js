@@ -8,6 +8,8 @@ const { sendSuccessResponse } = require('../utils/helpers');
 const userFactory = require('./factories/userFactory');
 const uploadImage = require('../utils/uploadImage');
 const handlerFactory = require('./factories/handlerFactory');
+const axios = require('axios')
+const moment = require('moment')
 
 exports.register = catchAsync(async(req , res , next) => {
     const { email , image } = req.body;

@@ -4,6 +4,8 @@ const { sendSuccessResponse } = require('../utils/helpers');
 const handlerFactory = require('./factories/handlerFactory');
 const VanBooking = require('../models/vanBookingModel');
 const Driver = require('../models/driverModel');
+const vanBookingValidation = require('../validations/vanBookingValidation');
+const moment = require('moment');
 
 const populateObj = [
     {
@@ -17,22 +19,35 @@ const populateObj = [
 ]
 
 exports.createBooking = catchAsync(async(req , res , next) => {
-    const { driverId , customerLocation } = req.body;
-    if(!driverId || !customerLocation) {
-        return next(new AppError('Driver id and customer location is required.' , 400))
+    const { driverId , date } = req.body;
+    const { error } = vanBookingValidation.validate(req.body);
+    if(error) {
+        return next(new AppError(error.details[0].message , 400))
     }
     const driver = await Driver.findById(driverId);
     if(!driver) {
         return next(new AppError('Invalid Driver Selected. Driver not found.' , 400))
     }
-    const bookingExist = await VanBooking.findOne({ user : req.user._id , driver : driver._id , status : { $ne : 'completed' }});
+    const bookingExist = await VanBooking.findOne({ 
+        user : req.user._id ,
+        driver : driver._id ,
+        $or : [
+            { status : { $ne : 'completed' } } , 
+            { status : { $ne : 'cancelled' } } , 
+        ] ,
+        date : new Date(req.body.date)
+    });
     if(bookingExist) {
-        return next(new AppError("You have already booked this van.", 400))
+        return next(new AppError("You have already booked this van for selected date.", 400))
+    }
+    if(new Date(date) < moment().startOf('day') || new Date(date) > moment(new Date()).add(2 , 'days') ) {
+        return next(new AppError('Selected date is invalid. You can create pre booking for 2 days only .' , 400))
     }
     const newBooking = await VanBooking.create({
         user : req.user._id ,
         driver : driver._id ,
-        customerLocation 
+        ...req.body ,
+        username : req.user.firstName + ' ' + req.user.lastName 
     });
     sendSuccessResponse(res , 200 , {
         message : 'Van booked successfully.',

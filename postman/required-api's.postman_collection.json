@@ -73,6 +73,92 @@
 			]
 		},
 		{
+			"name": "forgotPassword",
+			"item": [
+				{
+					"name": "Send Forgot password otp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone\" : \"392039023933\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/user/forgot-password",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"user",
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Otp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"otp\" : \"049304\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/user/verify-otp",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"user",
+								"verify-otp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone\" : \"992039023\" ,\r\n    \"newPassword\" : \"user1234\" ,\r\n    \"confirmPassword\" : \"suerous\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/user/reset-password",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"user",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Place Order",
 			"request": {
 				"method": "POST",
@@ -162,6 +248,95 @@
 					"path": [
 						"order",
 						"647f3702ccf1e31e343ef4e8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.smsstriker.com/API/sms.php?username=Inspiredgrow&password=645439&from=IGPGRO&to=8787026645&msg=Dear Shekhar your login OTP is 8899, regards inspired grow.&type=1&template_id=1707168662732762242",
+					"protocol": "https",
+					"host": [
+						"www",
+						"smsstriker",
+						"com"
+					],
+					"path": [
+						"API",
+						"sms.php"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "Inspiredgrow"
+						},
+						{
+							"key": "password",
+							"value": "645439"
+						},
+						{
+							"key": "from",
+							"value": "IGPGRO"
+						},
+						{
+							"key": "to",
+							"value": "8787026645"
+						},
+						{
+							"key": "msg",
+							"value": "Dear Shekhar your login OTP is 8899, regards inspired grow."
+						},
+						{
+							"key": "type",
+							"value": "1"
+						},
+						{
+							"key": "template_id",
+							"value": "1707168662732762242"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get my Ongoing orders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/order/my/on-going",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"order",
+						"my",
+						"on-going"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get My Orders History",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/order/my/history",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"order",
+						"my",
+						"history"
 					]
 				}
 			},

@@ -32,5 +32,8 @@ app.use('/api/van-booking' , require('./routes/vanBookingRoutes'));
 
 app.use(require('./middlewares/errorHandler'));
 
+console.log(new Date());
+console.log({ now : Date.now() })
+
 const PORT = process.env.PORT || 4400;
 app.listen(PORT , () => console.log(`server is listening on port ${PORT}`))

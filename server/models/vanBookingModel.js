@@ -23,8 +23,22 @@ const vanBookingSchema = new mongoose.Schema({
         type : Number ,
     } , 
     customerLocation : {
-        type : String ,
-        required : [true , 'Customer location is required.']
+        lat : {
+            type : String ,
+            required : [true , 'Latitude is required.']
+        } ,
+        lng : {
+            type : String ,
+            required : [true , 'Logitude is required.']
+        }
+    } , 
+    date : {
+        type : Date ,
+        required : [true , 'Booking date is required.']
+    } ,
+    username : {
+        type : String , 
+        required : [true , 'Username is required.']
     }
 
 } , { timestamps : true });
